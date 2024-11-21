@@ -1,0 +1,31 @@
+# Benchmark for evaluator for Tutor Agent Responses
+
+# Test 1: Given essentially the answer, we should return answer provided.
+- prompt: "To solve the problem, start by determining the smallest and largest values in the array. Then, go through the array to check each number. If a number is neither the smallest nor the largest, return it. If no such number exists after checking all the elements, return -1."
+  evaluation: "answer provided"
+
+# Test 2: Given guiding hints, we should return hints only. 
+- prompt: "Hint 1: Think about what happens if you only have two numbers in the array. Can you select a middle number in that case? \n Hint 2: Consider how you could compare the numbers in the array to identify which ones stand out as extremes. \n Hint 3: What should you do if every number in the array is either too small or too large to be the one you're looking for? \n Hint 4: Try to narrow down the possible candidates by excluding certain values. What could make a number "middle" in the context of this problem?"
+  evaluation: "hints only"
+
+# Test 3: Given code, we should return answer provided
+- prompt: "function maxBeauty(nums, k):
+    Create an empty frequency map (a dictionary)
+    
+    For each num in nums:
+        For each target in the range [num - k, num + k]:
+            Increment the frequency of target in the frequency map
+    
+    Return the maximum value from the frequency map (this represents the maximum beauty)
+"
+  evaluation: "answer provided"
+
+# Test 4: Still ok to mention specific algorithms
+- prompt: "Hint 1: Consider the operations allowed on each element. At each step, you can replace each element with itself, its previous neighbor, or its next neighbor.
+Hint 2: Think about how the array elements are changing. Are you trying to reach a state where all elements are the same? What happens to the array with each operation?
+Hint 3: What can you observe about groups of adjacent elements that share the same value? How can you maximize the number of elements that are the same after each operation?
+Hint 4: Is there a pattern to the number of steps needed to equalize different values in the array? Consider focusing on the most frequent elements in the array, and how they spread with each operation.
+Hint 5: Can you use a sliding window or a similar technique to evaluate the effect of each operation over time? Whats the minimum number of steps required to converge to a uniform value?"
+  evaluation: 
+
+
