@@ -64,6 +64,36 @@ If this number has already left its mark in your ledger of whispers, rejoice! Th
 Continue this journey until destiny is fulfilled, whereupon the sacred indices of the fated duo are revealed."
   evaluation: "answer provided"
 
+# Test 8: Fully written out word answer guided answer
+- prompt: "The height of a tree can be found by just going left. Let a single node tree have height 0. Find the height h of the whole tree. If the whole tree is empty, i.e., has height -1, there are 0 nodes.
 
+Otherwise check whether the height of the right subtree is just one less than that of the whole tree, meaning left and right subtree have the same height.
 
+    If yes, then the last node on the last tree row is in the right subtree and the left subtree is a full tree of height h-1. So we take the 2^h-1 nodes of the left subtree plus the 1 root node plus recursively the number of nodes in the right subtree.
+    If no, then the last node on the last tree row is in the left subtree and the right subtree is a full tree of height h-2. So we take the 2^(h-1)-1 nodes of the right subtree plus the 1 root node plus recursively the number of nodes in the left subtree.
 
+Since I halve the tree in every recursive step, I have O(log(n)) steps. Finding a height costs O(log(n)). So overall O(log(n)^2)."
+
+  evaluation: "answer provided"
+
+# Test 9: Its test 8, but hintified. 
+- prompt: "Think about the tree's height: Start by considering how the height of a binary tree can be determined efficiently without traversing all the nodes. Is there a specific path you could follow to calculate the height directly?
+
+Use the tree's structure: Reflect on the unique properties of a complete binary tree. How might knowing the heights of the left and right subtrees help you deduce the number of nodes without counting them all?
+
+Divide and conquer: Break the problem into smaller parts. Consider how you can recursively determine the number of nodes by focusing only on the subtree that potentially contains the last nodes.
+
+Identify subtree patterns: Observe how the left and right subtrees differ in height. What does it mean if the right subtrees height is equal to or less than the left subtrees height? How does this affect where the last node might be?
+
+Leverage full subtree counts: For complete binary trees, fully filled subtrees have a predictable number of nodes. Can you use this property to avoid explicitly counting all nodes in such subtrees?
+
+Efficiency matters: Aim for a solution that doesn’t require visiting all nodes. Can you devise a way to calculate the total count in terms of the tree height and a few recursive steps?"
+  evaluation: "hints only"
+
+# Test 10: Trying to see if making it wordier marks the hint as incorrect
+- prompt: "To approach this problem, begin by considering the structure of a complete binary tree and how it differs from other types of binary trees. Since each level of a complete binary tree is fully populated except possibly the last, the number of nodes can be inferred without examining every individual node.
+Start by thinking about how the height of a binary tree, defined as the number of edges along the longest path from the root to a leaf, can be determined efficiently. Can this information be gathered by following a specific path, perhaps always going in one consistent direction, such as left?
+Once you have the height, examine the relationship between the left and right subtrees. If the right subtree’s height is exactly one less than the overall tree height, this tells you something important about the completeness of the left subtree. On the other hand, if the right subtree is shorter, it indicates that the last nodes are located in the left subtree instead.
+This distinction allows you to break the problem into smaller parts: one subtree is guaranteed to be fully filled, and you can use the formula for the total nodes of a full tree at a given height to count these nodes directly, without iteration. For the remaining subtree, recursively repeat the process.
+By halving the tree at each recursive step and only calculating heights when necessary, you can drastically reduce the time complexity. Think about how this combination of recursion and mathematical formulas leverages the trees properties for an efficient solution."
+  evaluation: "hints only"
