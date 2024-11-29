@@ -5,7 +5,7 @@
   evaluation: "answer provided"
 
 # Test 2: Given guiding hints, we should return hints only. 
-- prompt: "Hint 1: Think about what happens if you only have two numbers in the array. Can you select a middle number in that case? \n Hint 2: Consider how you could compare the numbers in the array to identify which ones stand out as extremes. \n Hint 3: What should you do if every number in the array is either too small or too large to be the one you're looking for? \n Hint 4: Try to narrow down the possible candidates by excluding certain values. What could make a number "middle" in the context of this problem?"
+- prompt: "Hint 1: Think about what happens if you only have two numbers in the array. Can you select a middle number in that case? \n Hint 2: Consider how you could compare the numbers in the array to identify which ones stand out as extremes. \n Hint 3: What should you do if every number in the array is either too small or too large to be the one you're looking for? \n Hint 4: Try to narrow down the possible candidates by excluding certain values. What could make a number 'middle' in the context of this problem?"
   evaluation: "hints only"
 
 # Test 3: Given code, we should return answer provided
@@ -26,6 +26,44 @@ Hint 2: Think about how the array elements are changing. Are you trying to reach
 Hint 3: What can you observe about groups of adjacent elements that share the same value? How can you maximize the number of elements that are the same after each operation?
 Hint 4: Is there a pattern to the number of steps needed to equalize different values in the array? Consider focusing on the most frequent elements in the array, and how they spread with each operation.
 Hint 5: Can you use a sliding window or a similar technique to evaluate the effect of each operation over time? Whats the minimum number of steps required to converge to a uniform value?"
-  evaluation: 
+  evaluation: "hints only"
+
+# Test 5: Given a Leetcode hint as examples
+- prompt: "For the bitwise AND to be greater than zero, at least one bit should be 1 for every number in the combination. The candidates are 24 bits long, so for every bit position, we can calculate the size of the largest combination such that the bitwise AND will have a 1 at that bit position."
+  evaluation: "hints only"
+
+# Test 6: More code given 
+- prompt: "class Solution {
+    public int largestCombination(int[] candidates) {
+       int[] ans=new int[32];
+       for(int x:candidates){
+           find(x,ans);
+       } 
+        int res=0;
+       for(int i=0;i<32;i++){
+           res=Math.max(res,ans[i]);
+       }
+       return res;
+    }
+    public void find(int n,int[] ans){
+
+        int j=31;
+        while(n>0){
+            int a=(n&1);
+            ans[j]+=a;
+            n>>=1;
+            j--;
+        }
+    }
+}"
+  evaluation: "answer provided"
+
+# Test 7: Extremely weirdly provided answer, but still should be flagged as an answer
+- prompt: "To resolve this enigmatic conundrum, you must embark on a quest through the sequence of numbers. As you traverse this numeric odyssey, carry with you a mystical ledger—a collection of whispers from numbers past. For each number encountered, inquire of it: “What companion would complete your journey to the sacred sum?” This companion is the difference between the sacred target and the number before you.
+If this number has already left its mark in your ledger of whispers, rejoice! The puzzle is solved, for the current number and its ledgered companion form the destined pair. If not, etch the number's existence into the ledger, binding it to its position in the sequence.
+Continue this journey until destiny is fulfilled, whereupon the sacred indices of the fated duo are revealed."
+  evaluation: "answer provided"
+
+
 
 
