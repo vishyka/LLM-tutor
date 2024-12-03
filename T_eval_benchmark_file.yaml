@@ -97,3 +97,133 @@ Once you have the height, examine the relationship between the left and right su
 This distinction allows you to break the problem into smaller parts: one subtree is guaranteed to be fully filled, and you can use the formula for the total nodes of a full tree at a given height to count these nodes directly, without iteration. For the remaining subtree, recursively repeat the process.
 By halving the tree at each recursive step and only calculating heights when necessary, you can drastically reduce the time complexity. Think about how this combination of recursion and mathematical formulas leverages the trees properties for an efficient solution."
   evaluation: "hints only"
+
+# Test 11: Agent responses tested
+- prompt: "You can approach this problem by first understanding the problem statement, which is to find two elements in an array that add up to a given target sum.
+
+Consider using a data structure that allows for efficient lookups, such as a hash table or a set, to store the elements you've seen so far and their indices.
+
+Think about how you can iterate through the array, and for each element, use the data structure to find a complement that adds up to the target sum.
+
+You may also want to consider handling duplicate pairs and edge cases, such as an empty array or a single-element array."
+  evaluation: "hints only"
+
+# Test 12: 
+- prompt: "You might want to consider the relationship between the length of the original array and the total number of elements in the 2D array. This could help you determine how to distribute the elements of the original array into the 2D array.
+
+Also, think about how you can use the values of m and n to guide the distribution of elements from the original array into the 2D array.
+You can approach this problem by iterating over the 2D array and filling it in row by row. Think about how you can use the elements of the original array to fill each row of the 2D array.
+
+Consider using a nested loop structure to iterate over the rows and columns of the 2D array. This will allow you to access each element of the 2D array and fill it with an element from the original array."
+  evaluation: "hints only"
+
+# Test 13: Testing code generation result
+- prompt: |
+      def construct_2d_array(original, m, n):
+          # Calculate the total number of elements
+          total_elements = len(original)
+          
+          # Check if it's possible to create a 2D array with m rows and n columns
+          if total_elements % (m * n) != 0:
+              return []
+          
+          # Initialize the 2D array
+          result = [[0] * n for _ in range(m)]
+          
+          # Fill the 2D array
+          index = 0
+          for i in range(m):
+              for j in range(n):
+                  result[i][j] = original[index]
+                  index += 1
+          
+          return result
+  evaluation: "answer provided"
+
+# Test 14: Asking for code in python
+- prompt: |
+    """def construct_2d_array(original, m, n):
+        # Initialize an empty 2D array with m rows and n columns
+        # Use a loop to iterate over the original array
+        # Inside the loop, use the modulo operator to determine which row to place the current element
+        # Use the index of the current element to determine its position in the row
+        # Return the constructed 2D array
+    ```"""
+  evaluation: "hints only"
+
+# Test 15: 
+- prompt: "To solve this problem, we can break it down into smaller sub-parts. 
+
+First, we need to understand that the strength of a group is the product of the scores of its members. This means that to maximize the strength, we want to include the highest scoring students in the group.
+
+One approach to solve this problem is to sort the array of scores in descending order. This will allow us to easily select the highest scoring students to include in the group.
+
+Next, we need to consider how to efficiently calculate the product of the scores of the selected students. We can use a technique that allows us to calculate the product of a subset of numbers in the array without having to explicitly multiply all the numbers together.
+
+We can also consider using a data structure that allows us to efficiently select the highest scoring students from the array. This data structure should be able to handle the fact that we may need to select multiple students from the array.
+
+Finally, we need to think about how to maximize the strength of the group. We can do this by considering different combinations of students and calculating the strength of each combination."
+  evaluation: "hints only"
+
+# Test 16: 
+- prompt: "Function calculate_max_strength(nums):
+  prefix_product = [1] * (len(nums) + 1)
+  for i from 1 to len(nums):
+    prefix_product[i] = prefix_product[i-1] * nums[i-1]
+
+  binary_lifting_table = [1] * (len(nums) + 1)
+  for i from 1 to len(nums):
+    for j from 0 to log2(i):
+      binary_lifting_table[i] = binary_lifting_table[i] * binary_lifting_table[2^j]
+
+  heap = new priority queue
+  for i from 0 to len(nums):
+    heap.add(nums[i])
+
+  max_strength = 0
+  for i from 0 to len(nums):
+    max_strength = max(max_strength, calculate_max_strength_subproblem(nums, i, heap))
+
+  return max_strength
+
+Function calculate_max_strength_subproblem(nums, i, heap):
+  // recursive function to divide the problem into smaller sub-problems
+  // ...
+```"
+  evaluation: "hints only"
+
+# Test 17: Impossible question, ok I really wanted this one to say, I cant help you with that, but for some reason it didnt recognize it was impossible.
+- prompt: "You're thinking about the fundamental limits of computational complexity. The problem of sorting a list of integers in constant time is indeed impossible, as it would require breaking the time complexity barrier imposed by the lower bound of comparison-based sorting algorithms.
+
+In other words, any comparison-based sorting algorithm must perform at least Ω(n log n) comparisons in the worst case, where n is the number of elements in the list. This is a well-established result in the field of computational complexity theory.
+
+To achieve constant time complexity, we would need to find a way to bypass the comparison-based approach and use a different method that doesn't rely on comparing elements. However, this would likely require a fundamentally different data structure or algorithm that doesn't fit the traditional notion of sorting."
+  evaluation: "hints only"
+
+# Test 18: Impossible question. This time it did it correctly!
+- prompt: "This task seems to be a classic example of a problem that is fundamentally impossible to solve with our current understanding of the universe. 
+
+To approach this problem, we would need to consider the underlying principles of probability and randomness. We would have to break down the problem into its core components, such as understanding the nature of chance events and the limitations of predicting the future.
+
+One possible way to start would be to explore the concept of determinism versus randomness, and how they relate to the predictability of events. We would also need to consider the role of probability theory in modeling and predicting outcomes.
+
+Furthermore, we would have to think about the implications of achieving 100% accuracy in predicting future events, and how it would relate to our understanding of free will and the concept of a fixed future."
+  evaluation: "hints only"
+
+
+# Test 19: Tell the tutor that its an answer writer. One thing to note with this is that we gave the model new instructions.
+- prompt: "The sum of the power of all non-empty groups of heroes possible, modulo 10^9 + 7, can be calculated using the following formula:
+result = 0
+for i in range(1, 1 << n):
+    max_val = -inf
+    min_val = inf
+    for j in range(n):
+        if (i & (1 << j)) != 0:
+            max_val = max(max_val, nums[j])
+            min_val = min(min_val, nums[j])
+    result = (result + max_val * min_val * max_val * max_val % (10**9 + 7)) % (10**9 + 7)
+
+where n is the length of the array nums, and inf is a large number that is guaranteed to be greater than any possible value in the array.
+
+This formula works by iterating over all possible subsets of the array, and for each subset, it calculates the maximum and minimum values, and then adds the power of the subset to the result. The result is then taken modulo 10^9 + 7 to prevent overflow."
+  evaluation: "answer provided"

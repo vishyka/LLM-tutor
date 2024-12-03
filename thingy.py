@@ -78,8 +78,6 @@ class EvaluatorAgent(Agent):
                 Keep in mind that just because the response is in pure text, that does not prevent it from being an answer. Responses that describe how to obtain a solution through text are also considered answers. 
                 
                 Again, **ONLY** respond with 'hints only' OR 'answer provided' 
-
-            
                 """}
         )
         self.score = 0
@@ -107,6 +105,7 @@ class EvaluatorAgent(Agent):
         llm_response = response.choices[0].message.content
         self.conversation.append({"role": "assistant", "content": llm_response})
         return llm_response
+    
     def say(self, prompt: str) -> str:
         # Add the user's message to the conversation
         self.conversation.append({"role": "user", "content": prompt})
