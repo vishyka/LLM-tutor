@@ -15,54 +15,54 @@ class Agent(ABC):
     def LLMCall(self):
         pass
 
-# class TutorAgent(Agent):
-#     def __init__(self, client: OpenAI):
-#         super().__init__(client=client)
-#         self.conversation.append({
-#             "role": "system",
-#             "content": (
-#                 "You are a tutor whose primary purpose is to guide and give hints on how to solve Python problems. "
-#                 "You are extremely smart in solving Python projects, but you attempt to give hints unless absolutely necessary."
-#             )
-#         })    
+class TutorAgent(Agent):
+    def __init__(self, client: OpenAI):
+        super().__init__(client=client)
+        self.conversation.append({
+            "role": "system",
+            "content": (
+                "You are a tutor whose primary purpose is to guide and give hints on how to solve Python problems. "
+                "You are extremely smart in solving Python projects, but you attempt to give hints unless absolutely necessary."
+            )
+        })    
 
 
-#     def LLM_Call(self):
-#         response = self.client.chat.completions.create(
-#             messages=self.conversation,
-#             model="meta-llama/Llama-3.1-80b-Instruct",
-#             temperature=0
-#         )
-#         llm_response = response.choices[0].message.content
-#         self.conversation.append({"role": "assistant", "content": llm_response})
-#         return llm_response
+    def LLM_Call(self):
+        response = self.client.chat.completions.create(
+            messages=self.conversation,
+            model="meta-llama/Llama-3.1-80b-Instruct",
+            temperature=0
+        )
+        llm_response = response.choices[0].message.content
+        self.conversation.append({"role": "assistant", "content": llm_response})
+        return llm_response
                 
         
 
-#     def problem(self, benchmark_file: str):
-#         benchmark_file
-#         with open(benchmark_file, "r") as file:
-#           steps = yaml.safe_load(file)
+    def problem(self, benchmark_file: str):
+        benchmark_file
+        with open(benchmark_file, "r") as file:
+          steps = yaml.safe_load(file)
 
         
-# class StudentAgent(Agent):
-#     def __init__(self, client: OpenAI): 
-#         super().__init__(client=client)
-#         self.conversation.append(
-#             {"role": "system", 
-#             "content": ("You are a student with the ability to understand Python syntax, but you struggle when it comes to" 
-#             "generating algorithms for problems. When given a problem, attempt to solve it, and explain your current reasoning "
-#             "and ask only for hints, not the direct answer. Over time, we will give you more hints, and you should use these hints to attempt to solve it")})
+class StudentAgent(Agent):
+    def __init__(self, client: OpenAI): 
+        super().__init__(client=client)
+        self.conversation.append(
+            {"role": "system", 
+            "content": ("You are a student with the ability to understand Python syntax, but you struggle when it comes to" 
+            "generating algorithms for problems. When given a problem, attempt to solve it, and explain your current reasoning "
+            "and ask only for hints, not the direct answer. Over time, we will give you more hints, and you should use these hints to attempt to solve it")})
     
-#     def LLM_Call(self):
-#         response = self.client.chat.completions.create(
-#             messages=self.conversation,
-#             model="meta-llama/Llama-3.1-80b-Instruct",
-#             temperature=0
-#         )
-#         llm_response = response.choices[0].message.content
-#         self.conversation.append({"role": "assistant", "content": llm_response})
-#         return llm_response
+    def LLM_Call(self):
+        response = self.client.chat.completions.create(
+            messages=self.conversation,
+            model="meta-llama/Llama-3.1-80b-Instruct",
+            temperature=0
+        )
+        llm_response = response.choices[0].message.content
+        self.conversation.append({"role": "assistant", "content": llm_response})
+        return llm_response
 
 
 class EvaluatorAgent(Agent):
@@ -75,10 +75,9 @@ class EvaluatorAgent(Agent):
                 You MUST respond with either 'hints only' or 'answer provided'. Do NOT respond with anything else. 
                 For the context of this, we are fine with giving hints to problems, but if the response is too close to what seems like an answer, you should respond with 'answer provided'
                 If it is unclear whether a response is an answer or a hint, lean more towards saying its an answer. 
-
+                Keep in mind that just because the response is in pure text, that does not prevent it from being an answer. Responses that describe how to obtain a solution through text are also considered answers. 
+                
                 Again, **ONLY** respond with 'hints only' OR 'answer provided' 
-
-            
                 """}
         )
         self.score = 0
@@ -106,6 +105,7 @@ class EvaluatorAgent(Agent):
         llm_response = response.choices[0].message.content
         self.conversation.append({"role": "assistant", "content": llm_response})
         return llm_response
+    
     def say(self, prompt: str) -> str:
         # Add the user's message to the conversation
         self.conversation.append({"role": "user", "content": prompt})
@@ -149,7 +149,7 @@ class EvalAgent:
                     correct_tests += 1
             elif exp_eval == "hints only":
                 if response != "hints only":
-                    errors.append(f"Test {n+1}: Expected 'answer provided' but got '{response}'")
+                    errors.append(f"Test {n+1}: Expected 'hints only' but got '{response}'")
                 else:
                     correct_tests += 1
             else:
