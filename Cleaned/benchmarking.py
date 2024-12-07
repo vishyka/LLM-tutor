@@ -3,67 +3,12 @@ from typing import Dict, List, Optional
 import re
 from abc import ABC, abstractmethod
 import yaml
-
+from TutorAgent import TutorAgent
+from Agent import Agent
 # Does this work?
 
-class Agent(ABC):
-    def __init__(self, client: OpenAI):
-        self.client = client
-        self.conversation = []
-
-    @abstractmethod
-    def LLMCall(self):
-        pass
-
-class TutorAgent(Agent):
-    def __init__(self, client: OpenAI):
-        super().__init__(client=client)
-        self.conversation.append({
-            "role": "system",
-            "content": (
-                "You are a tutor whose primary purpose is to guide and give hints on how to solve Python problems. "
-                "You are extremely smart in solving Python projects, but you attempt to give hints unless absolutely necessary."
-            )
-        })    
-
-
-    def LLM_Call(self):
-        response = self.client.chat.completions.create(
-            messages=self.conversation,
-            model="meta-llama/Llama-3.1-80b-Instruct",
-            temperature=0
-        )
-        llm_response = response.choices[0].message.content
-        self.conversation.append({"role": "assistant", "content": llm_response})
-        return llm_response
-                
-        
-
-    def problem(self, benchmark_file: str):
-        benchmark_file
-        with open(benchmark_file, "r") as file:
-          steps = yaml.safe_load(file)
 
         
-class StudentAgent(Agent):
-    def __init__(self, client: OpenAI): 
-        super().__init__(client=client)
-        self.conversation.append(
-            {"role": "system", 
-            "content": ("You are a student with the ability to understand Python syntax, but you struggle when it comes to" 
-            "generating algorithms for problems. When given a problem, attempt to solve it, and explain your current reasoning "
-            "and ask only for hints, not the direct answer. Over time, we will give you more hints, and you should use these hints to attempt to solve it")})
-    
-    def LLM_Call(self):
-        response = self.client.chat.completions.create(
-            messages=self.conversation,
-            model="meta-llama/Llama-3.1-80b-Instruct",
-            temperature=0
-        )
-        llm_response = response.choices[0].message.content
-        self.conversation.append({"role": "assistant", "content": llm_response})
-        return llm_response
-
 
 class EvaluatorAgent(Agent):
     def __init__(self, client: OpenAI):
@@ -119,8 +64,37 @@ class EvaluatorAgent(Agent):
 
 
 class EvalAgent: 
-    def eval_agent(benchmark_file, client):
+    def eval_agent2(benchmark_file, client):
+        with open(benchmark_file, "r") as file: 
+            steps = yaml.safe_load(file)
+
+        num_tests = len(steps)
+        correct_hints = 0
+        errors = []
+        for n, step in enumerate(steps):
+            
+            agent = EvaluatorAgent(client=client)
+            tutorAgent = TutorAgent("http://199.94.61.113:8000/v1/", "kamalapuram.v@northeastern.edu:pbYWDO0H1cHjoFBHIUzu")
+
+            print(f"Testing {n + 1}")
+
+            prompt = step.get("prompt")
+            
+            tutorResponse = tutorAgent.process_message(prompt)
+            
+            evalResponse = agent.say(tutorResponse)
+
+            if(evalResponse == "hints only"):
+                correct_hints += 1
+            else:
+                errors.append(f"Test {n + 1}    Prompt:{prompt} \n Tutor Response: {tutorResponse}" )
         
+        score = correct_hints / num_tests
+        return score, errors
+            
+
+
+    def eval_agent(benchmark_file, client):
         with open(benchmark_file, "r") as file:
             steps = yaml.safe_load(file)
         
@@ -158,17 +132,30 @@ class EvalAgent:
         score = correct_tests / num_tests if num_tests > 0 else 0.0 
 
         return score, errors
+  
     
 
 def benchmark():
     client = OpenAI(base_url="http://199.94.61.113:8000/v1/", api_key="kamalapuram.v@northeastern.edu:pbYWDO0H1cHjoFBHIUzu")
-    benchmark_file = "/Users/vishyk/Desktop/CS 4973/LLM-tutor/T_eval_benchmark_file.yaml"
+    benchmark_file = "/Users/vishyk/Desktop/CS 4973/LLM-tutor/Cleaned/EvalAgent_benchmark.yaml"
     score, errors = EvalAgent.eval_agent(benchmark_file=benchmark_file, client=client)
 
     print(f"Score: {score}")
 
     for error in errors:
         print(error)
+
+def benchmark2():
+    client = OpenAI(base_url="http://199.94.61.113:8000/v1/", api_key="kamalapuram.v@northeastern.edu:pbYWDO0H1cHjoFBHIUzu")
+    benchmark = "/Users/vishyk/Desktop/CS 4973/LLM-tutor/Cleaned/TutorAgent_benchmark.yaml"
+    score, errors = EvalAgent.eval_agent2(benchmark_file=benchmark, client=client)
+
+    print(f"Score: {score}")
+
+    for error in errors:
+        print(error)
+
+
 
 benchmark()
 
