@@ -1,0 +1,65 @@
+# Test 1
+- prompt: "You are given a list of numbers [1, 2, 3, 4, 5]. Write a Python function to find the product of all the elements in the list."
+
+# Test 2
+- prompt: "You are given a string and need to determine if it is an anagram of another string. For example, 'listen' is an anagram of 'silent'. Write a Python function to check if two strings are anagrams."
+
+# Test 3
+- prompt: "Solve the quadratic equation: 2x^2 + 3x - 2 = 0. What are the possible values for x?"
+
+# Test 4
+- prompt: "You have a dataset containing the heights of 10 individuals. What is the best way to compute the average height using Python?"
+
+# Test 5
+- prompt: "Write a Python function to reverse a string without using Python’s built-in reverse function."
+
+# Test 6
+- prompt: "You have a list of dictionaries representing students with their grades. Write a Python function to find the student with the highest grade."
+
+# Test 7
+- prompt: "You are given two sorted arrays. Write a Python function to merge them into a single sorted array."
+
+# Test 8
+- prompt: "Solve for x in the equation: 5(x - 3) + 2 = 3x + 1."
+
+# Test 9
+- prompt: "In a right triangle, the lengths of the two legs are 6 and 8. What is the length of the hypotenuse?"
+
+# Test 10
+- prompt: "Write a Python function to remove all duplicates from a list of numbers."
+
+# Test 11
+- prompt: "A spaceship is traveling at 20,000 km/h. How far will it travel in 5 hours?"
+
+# Test 12
+- prompt: "In a chemical reaction, 2 moles of hydrogen react with 1 mole of oxygen to form water. If you have 4 moles of hydrogen, how many moles of water can you produce?"
+
+# Test 13
+- prompt: "Write a Python function that takes a string and returns the character that occurs the most frequently."
+
+# Test 14
+- prompt: "You are given a list of grades: [78, 85, 92, 88, 94]. Write a Python function to determine the highest grade and the lowest grade."
+
+# Test 15
+- prompt: "In an ecosystem, the number of animals in a population increases at a rate proportional to the current population. If the initial population is 100 and the rate is 2% per hour, how many animals will be in the population after 3 hours?"
+
+# Test 16
+- prompt: "You are given a string with mixed upper and lower case letters. Write a Python function that counts the number of uppercase letters in the string."
+
+# Test 17
+- prompt: "Solve the system of equations:  
+x + y = 10  
+2x - y = 4  
+What are the values of x and y?"
+
+# Test 18
+- prompt: "You are given the first five terms of an arithmetic sequence: 3, 7, 11, 15, 19. What is the 10th term in the sequence?"
+
+# Test 19
+- prompt: "Write a Python function that takes a list of numbers and returns the sum of the even numbers only."
+
+# Test 20
+- prompt: "A student needs 80% or higher to pass an exam. If the student scores 64 points out of 80 on the first part of the exam, how many points out of 120 do they need to score on the second part to pass the exam?"
+
+# Test 21
+- prompt: "Help me solve two sum"
