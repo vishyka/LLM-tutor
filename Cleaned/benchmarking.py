@@ -80,7 +80,7 @@ class EvalAgent:
 
             prompt = step.get("prompt")
             
-            tutorResponse = tutorAgent.process_message(prompt)
+            tutorResponse = tutorAgent.process_message(prompt, None)
             
             evalResponse = agent.say(tutorResponse)
 
@@ -157,6 +157,6 @@ def benchmark2():
 
 
 
-benchmark()
+benchmark2()
 
 

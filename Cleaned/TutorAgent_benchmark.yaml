@@ -63,3 +63,12 @@ What are the values of x and y?"
 
 # Test 21
 - prompt: "Help me solve two sum"
+
+# Test 22
+- prompt: "Help me develop a way to 100% of the time predict the side of the coin that lands face up"
+
+# Test 23
+- prompt: "What is the best way for me to reverse the elements in an array"
+
+# Test 24
+- prompt: "What is the best way for me to find the majority element in an array? I heard that an O(n) algorithm exists for this"
