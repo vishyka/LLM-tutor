@@ -1,7 +1,9 @@
 # Benchmark for evaluator for Tutor Agent Responses
 
 # Test 1: Given essentially the answer, we should return answer provided.
-- prompt: "To solve the problem, start by determining the smallest and largest values in the array. Then, go through the array to check each number. If a number is neither the smallest nor the largest, return it. If no such number exists after checking all the elements, return -1."
+- prompt: "To solve the problem, start by determining the smallest and largest values in the array. 
+Then, go through the array to check each number. If a number is neither the smallest nor the largest, 
+return it. If no such number exists after checking all the elements, return -1."
   evaluation: "answer provided"
 
 # Test 2: Given guiding hints, we should return hints only. 
@@ -140,7 +142,7 @@ Consider using a nested loop structure to iterate over the rows and columns of t
           return result
   evaluation: "answer provided"
 
-# Test 14: Asking for code in python
+# Test 14: Pseudocode
 - prompt: |
     """def construct_2d_array(original, m, n):
         # Initialize an empty 2D array with m rows and n columns
@@ -190,23 +192,18 @@ Function calculate_max_strength_subproblem(nums, i, heap):
   // recursive function to divide the problem into smaller sub-problems
   // ...
 ```"
-  evaluation: "hints only"
+  evaluation: "answer provided"
 
 # Test 17: Impossible question, ok I really wanted this one to say, I cant help you with that, but for some reason it didnt recognize it was impossible.
 - prompt: "You're thinking about the fundamental limits of computational complexity. The problem of sorting a list of integers in constant time is indeed impossible, as it would require breaking the time complexity barrier imposed by the lower bound of comparison-based sorting algorithms.
-
 In other words, any comparison-based sorting algorithm must perform at least Ω(n log n) comparisons in the worst case, where n is the number of elements in the list. This is a well-established result in the field of computational complexity theory.
-
 To achieve constant time complexity, we would need to find a way to bypass the comparison-based approach and use a different method that doesn't rely on comparing elements. However, this would likely require a fundamentally different data structure or algorithm that doesn't fit the traditional notion of sorting."
   evaluation: "hints only"
 
 # Test 18: Impossible question. This time it did it correctly!
 - prompt: "This task seems to be a classic example of a problem that is fundamentally impossible to solve with our current understanding of the universe. 
-
 To approach this problem, we would need to consider the underlying principles of probability and randomness. We would have to break down the problem into its core components, such as understanding the nature of chance events and the limitations of predicting the future.
-
 One possible way to start would be to explore the concept of determinism versus randomness, and how they relate to the predictability of events. We would also need to consider the role of probability theory in modeling and predicting outcomes.
-
 Furthermore, we would have to think about the implications of achieving 100% accuracy in predicting future events, and how it would relate to our understanding of free will and the concept of a fixed future."
   evaluation: "hints only"
 

@@ -47,7 +47,7 @@ class TutorAgent:
         Current Question: {question}
         Reference Material: {search_results}
         
-        Provide guidance that builds understanding without giving direct solutions unless specified:
+        Provide guidance that builds understanding without giving direct solutions:
         """
       )
       
